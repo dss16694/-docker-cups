@@ -24,9 +24,10 @@ LABEL maintainer="Florian Schwab <me@ydkn.io>" \
 RUN apt-get update \
   && apt-get install -y \
   sudo \
-  cups \
-  cups-bsd \
-  cups-filters \
+  wget \
+  gcc \
+  gcc++ \
+  make \
   foomatic-db-compressed-ppds \
   printer-driver-all \
   openprinting-ppds \
@@ -35,6 +36,11 @@ RUN apt-get update \
   hplip \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+RUN cd ~ \
+  && wget -O cups.tar.gz https://codeload.github.com/apple/cups/tar.gz/refs/tags/v2.3.6
+  && cd cups-2.3.6 \
+  && ./configure \
+  && make install
 
 # add print user
 RUN adduser --home /home/admin --shell /bin/bash --gecos "admin" --disabled-password admin \
