@@ -26,7 +26,7 @@ RUN apt-get update \
   sudo \
   wget \
   gcc \
-  gcc++ \
+  g++ \
   make \
   foomatic-db-compressed-ppds \
   printer-driver-all \
